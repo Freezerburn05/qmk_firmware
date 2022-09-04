@@ -75,19 +75,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MODS_ALT    (get_mods() & MOD_MASK_ALT)
 
 static bool clm_held = false;
-static bool fkey_registered;
+static int fkeys_registered;
 
 bool process_clm_key(uint16_t clm_keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         if (clm_held) {
             register_code(clm_keycode);
-            fkey_registered = true;
+            fkeys_registered++;
             return false;
         }
     } else {
-        if (fkey_registered) {
+        if (fkeys_registered > 0) {
             unregister_code(clm_keycode);
-            fkey_registered = false;
+            fkeys_registered--;
             return false;
         }
     }
