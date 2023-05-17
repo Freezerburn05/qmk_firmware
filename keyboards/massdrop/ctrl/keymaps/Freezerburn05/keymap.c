@@ -9,7 +9,6 @@ enum ctrl_keycodes {
     DBG_MOU,               //DEBUG Toggle Mouse Prints
     MD_BOOT,               //Restart into bootloader after hold timeout
     FB_TOG,                //Second toggle for the LEDs
-    FB_CLM,                //Caps lock modifier
 };
 
 /*
@@ -19,10 +18,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 */
 
 enum layer_names {
-    _KL = 0,    // Keybaord Layout - Defualt layer
-    _FL,        // Function layout
-    _CL,        // Coding Layout
-    _GL,        // Genshin Layout
+    _KL = 0,    // Keyboard Layout - Default layer
+    _FL,        // Function layer
+    _PL,        // Coding (Programming) Layer
+    _CL,        // Caps Lock Layer
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -30,31 +29,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,             KC_PSCR, KC_SLCK, FB_TOG,
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN,
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
+        MO(_CL), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,                              KC_UP,
-        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(1),   KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(_FL), KC_APP,  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [_FL] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            KC_MUTE, _______, _______,
-        _______, TO(2),   TO(3),   _______, _______, _______, _______, _______, _______, _______, TO(0),   _______, _______, _______,   KC_MPLY, KC_MSTP, KC_VOLU,
-        _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, _______, _______, _______, _______, _______, _______, _______,   KC_MPRV, KC_MNXT, KC_VOLD,
-        _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, _______, _______, _______, _______, _______, _______,
+        _______, TO(_PL), _______, _______, _______, _______, _______, _______, _______, _______, TO(_KL), _______, _______, _______,   KC_MPLY, KC_MSTP, KC_VOLU,
+        _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, _______, DBG_TOG, DBG_KBD, _______, _______, _______, _______,   KC_MPRV, KC_MNXT, KC_VOLD,
+        _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, _______, DBG_MTRX,DBG_MOU, _______, _______, _______,
         _______, RGB_TOG, FB_TOG,  _______, _______, MD_BOOT, _______, _______, _______, _______, _______, _______,                              _______,
-        _______, _______, _______,                   _______,                            _______, _______, KC_F13,  _______,            _______, _______, _______
+        _______, _______, _______,                   _______,                            _______, _______, KC_F24,  _______,            _______, _______, _______
     ),
-    [_CL] = LAYOUT(
+    [_PL] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
-        KC_UNDS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_LSPO, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_RSPC,                              _______,
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______
     ),
-    [_GL] = LAYOUT(
+    [_CL] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
-        FB_CLM,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  KC_F21,  KC_F22,  _______, _______, _______,   _______, _______, _______,
+        KC_CAPS, KC_L,    KC_ESC,  KC_M,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                              _______,
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______
     ),
@@ -74,53 +73,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MODS_CTRL   (get_mods() & MOD_MASK_CTRL)
 #define MODS_ALT    (get_mods() & MOD_MASK_ALT)
 
-static bool clm_held = false;
-static int fkeys_registered;
-
-bool process_clm_key(uint16_t clm_keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        if (clm_held) {
-            register_code(clm_keycode);
-            fkeys_registered++;
-            return false;
-        }
-    } else {
-        if (fkeys_registered > 0) {
-            unregister_code(clm_keycode);
-            fkeys_registered--;
-            return false;
-        }
-    }
-    return true;
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static uint32_t key_timer;
 
     switch (keycode) {
-        case KC_A:
-            return process_clm_key(KC_F1, record);
-        case KC_S:
-            return process_clm_key(KC_F2, record);
-        case KC_D:
-            return process_clm_key(KC_F3, record);
-        case KC_F:
-            return process_clm_key(KC_F4, record);
-        case KC_G:
-            return process_clm_key(KC_F5, record);
-        case KC_Q:
-            return process_clm_key(KC_L, record);
-        case KC_W:
-            return process_clm_key(KC_ESC, record);
-        case KC_E:
-            return process_clm_key(KC_M, record);
-        case FB_CLM:
-            if (record->event.pressed) {
-                clm_held = true;
-            } else {
-                clm_held = false;
-            }
-            return false;
         case FB_TOG:
             if (record->event.pressed) {
                 rgb_matrix_toggle();
