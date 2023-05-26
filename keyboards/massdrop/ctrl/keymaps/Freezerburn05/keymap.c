@@ -1,4 +1,10 @@
 #include QMK_KEYBOARD_H
+//#include "print.h"
+
+/*
+Copy in Case of Emergency:
+qmk flash
+*/
 
 enum ctrl_keycodes {
     U_T_AUTO = SAFE_RANGE, //USB Extra Port Toggle Auto Detect / Always Active
@@ -22,6 +28,7 @@ enum layer_names {
     _FL,        // Function layer
     _PL,        // Coding (Programming) Layer
     _CL,        // Caps Lock Layer
+    //_SH,        // Swap Hands Layer
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -51,12 +58,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_CL] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______,
-        _______, KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  KC_F21,  KC_F22,  _______, _______, _______,   _______, _______, _______,
-        KC_CAPS, KC_L,    KC_ESC,  KC_M,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                              _______,
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, _______, _______,   _______, _______, _______,
+        KC_CAPS, KC_P,    KC_O,    KC_I,    KC_U,    KC_Y,    _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
+        _______, KC_L,    KC_K,    KC_J,    KC_H,    KC_G,    _______, _______, _______, _______, _______, _______, _______,
+        _______, KC_M,    KC_N,    KC_B,    KC_V,    _______, _______, _______, _______, _______, _______, _______,                              _______,
+        _______, _______, KC_BSPC,                   _______,                            _______, _______, _______, _______,            _______, _______, _______
+    ),
+    /*
+    [_SH] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
+        _______, KC_P,    KC_O,    KC_I,    KC_U,    KC_Y,    _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
+        _______, KC_L,    KC_K,    KC_J,    KC_H,    KC_G,    _______, _______, _______, _______, _______, _______, _______,
+        _______, KC_M,    KC_N,    KC_B,    KC_V,    _______, _______, _______, _______, _______, _______, _______,                              _______,
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______
     ),
+    */
     /*
     [X] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______,
@@ -69,12 +86,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
 };
 
+const key_override_t f1_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F13);
+const key_override_t f2_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F14);
+const key_override_t f3_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F15);
+const key_override_t f4_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F16);
+const key_override_t f5_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F17);
+const key_override_t f6_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F18);
+const key_override_t f7_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F19);
+const key_override_t f8_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F20);
+const key_override_t f9_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F21);
+const key_override_t f10_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F22);
+const key_override_t f11_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F23);
+const key_override_t f12_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F24);
+
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &f1_key_override,
+    &f2_key_override,
+    &f3_key_override,
+    &f4_key_override,
+    &f5_key_override,
+    &f6_key_override,
+    &f7_key_override,
+    &f8_key_override,
+    &f9_key_override,
+    &f10_key_override,
+    &f11_key_override,
+    &f12_key_override,
+    NULL // Null terminate the array of overrides!
+};
+
 #define MODS_SHIFT  (get_mods() & MOD_MASK_SHIFT)
 #define MODS_CTRL   (get_mods() & MOD_MASK_CTRL)
 #define MODS_ALT    (get_mods() & MOD_MASK_ALT)
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static uint32_t key_timer;
+
+  // If console is enabled, it will print the matrix position and status of each key pressed
+#ifdef CONSOLE_ENABLE
+    //uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+#endif
 
     switch (keycode) {
         case FB_TOG:
