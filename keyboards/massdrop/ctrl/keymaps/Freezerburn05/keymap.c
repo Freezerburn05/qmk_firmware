@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______
     ),
     [_CL] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______,
+        _______, KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  KC_F21,  KC_F22,  KC_F23,  KC_F24,             _______, _______, _______,
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, _______, _______,   _______, _______, _______,
         KC_CAPS, KC_P,    KC_O,    KC_I,    KC_U,    KC_Y,    _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______,
         _______, KC_L,    KC_K,    KC_J,    KC_H,    KC_G,    _______, _______, _______, _______, _______, _______, _______,
@@ -87,17 +87,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const key_override_t f1_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F13);
-const key_override_t f2_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F14);
-const key_override_t f3_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F15);
-const key_override_t f4_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F16);
-const key_override_t f5_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F17);
-const key_override_t f6_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F18);
-const key_override_t f7_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F19);
-const key_override_t f8_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F20);
-const key_override_t f9_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F21);
-const key_override_t f10_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F22);
-const key_override_t f11_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F23);
-const key_override_t f12_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F1, KC_F24);
+const key_override_t f2_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F2, KC_F14);
+const key_override_t f3_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F3, KC_F15);
+const key_override_t f4_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F4, KC_F16);
+const key_override_t f5_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F5, KC_F17);
+const key_override_t f6_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F6, KC_F18);
+const key_override_t f7_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F7, KC_F19);
+const key_override_t f8_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F8, KC_F20);
+const key_override_t f9_key_override  = ko_make_basic(MOD_MASK_SHIFT, KC_F9, KC_F21);
+const key_override_t f10_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F10, KC_F22);
+const key_override_t f11_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F11, KC_F23);
+const key_override_t f12_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_F12, KC_F24);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
